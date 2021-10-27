@@ -7,6 +7,7 @@
             </div>
             <form action="{{ route('produto.edit') }}" method="post" autocomplete="off">
                 @csrf
+                @method('PUT')
                 <input type="hidden" name="id" id="produtoId" hidden>
                 <div class="modal-body">
                     <div class="row">

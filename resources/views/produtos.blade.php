@@ -3,9 +3,24 @@
 @section('modais')
     @include('modais.modal-novo-produto')
     @include('modais.modal-edit-produto')
+    @component('modais.modal-exclusao')
+        @slot('modalTitle')
+            Excluir Produto
+        @endslot
+        @slot('modalText')
+            Deseja realmente excluir o produto?
+        @endslot
+        @slot('modalRoute')
+            /produto/delete
+        @endslot
+    @endcomponent
 @endsection
 
 @section('loveapp-content')
+
+    @if (session('msgConfirm'))
+        @include('components.msg_confirmacao')
+    @endif
 
     <a href="#" class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#dlgNovoProduto">
         <i class="fa fa-plus" aria-hidden="true"></i>
@@ -21,6 +36,7 @@
                     <th class="text-uppercase text-center">estoque</th>
                     <th class="text-uppercase text-center">preço custo</th>
                     <th class="text-uppercase text-center">preço venda</th>
+                    <th class="text-uppercase text-center">status</th>
                     <th class="text-uppercase text-center" colspan="3">ações</th>
                 </tr>
             </thead>
@@ -32,8 +48,10 @@
                         <td class="text-center">{{ $p->estoque }}</td>
                         <td class="text-center">{{ number_format($p->preco_custo, 2, ',', '.') }}</td>
                         <td class="text-center">{{ number_format($p->preco_venda, 2, ',', '.') }}</td>
+                        <td class="text-center {{ $p->status == 1 ? 'text-success' : 'text-danger' }}">
+                            {{ $p->status == 1 ? 'ATIVO' : 'INATIVO' }}</td>
                         <td class="text-center">
-                            <a href="#">
+                            <a href="{{ route('produto.change', $p->id) }}">
                                 <i class="fa fa-refresh text-dark" aria-hidden="true"></i>
                             </a>
                         </td>
@@ -43,7 +61,7 @@
                             </a>
                         </td>
                         <td class="text-center">
-                            <a href="#">
+                            <a href="#" onclick="destroy({{ $p->id }});">
                                 <i class="fa fa-trash text-danger" aria-hidden="true"></i>
                             </a>
                         </td>

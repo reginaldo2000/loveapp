@@ -5,7 +5,7 @@
                 <h5 class="modal-title">{{ $modalTitle }}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="{{ route('categoria.prepare') }}" method="post">
+            <form action="{{ $modalRoute }}" method="post">
                 @csrf
                 @method('DELETE')
                 <div class="modal-body">
@@ -13,7 +13,7 @@
                     <p>{{ $modalText }}</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                         <i class="fa fa-times" aria-hidden="true"></i>
                         Cancelar
                     </button>

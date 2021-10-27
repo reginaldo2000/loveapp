@@ -45,9 +45,10 @@ class ProdutoController extends Controller
         $produto = new Produto();
         $produto->nome = $request->nome;
         $produto->estoque = $request->estoque;
-        $produto->preco_custo = $request->preco_custo;
-        $produto->preco_venda = $request->preco_venda;
+        $produto->preco_custo = str_replace(',', '.', str_replace('.', '', $request->preco_custo));
+        $produto->preco_venda = str_replace(',', '.', str_replace('.', '', $request->preco_venda));
         $produto->categoria_id = $request->categoria_id;
+        $produto->status = 1;
         $produto->save();
         return redirect('produtos')->with('msgConfirm', 'Produto cadastrado com sucesso!');
     }
@@ -82,7 +83,7 @@ class ProdutoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    private function update(Request $request, $id)
     {
         $produto = Produto::find($id);
         $produto->nome = $request->nome;
@@ -91,7 +92,6 @@ class ProdutoController extends Controller
         $produto->preco_venda = str_replace(',', '.', str_replace('.', '', $request->preco_venda));
         $produto->categoria_id = $request->categoria_id;
         $produto->update();
-        return redirect('produtos')->with('msgConfirm', 'Produto atualizado com sucesso!');
     }
 
     /**
@@ -102,6 +102,29 @@ class ProdutoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $produto = Produto::find($id);
+        $produto->delete();
+    }
+
+    public function prepareUpdate(Request $request)
+    {
+        $id = $request->id;
+        $this->update($request, $id);
+        return redirect('produtos')->with('msgConfirm', 'Produto atualizado com sucesso!');
+    }
+
+    public function changeStatus($id)
+    {
+        $produto = Produto::find($id);
+        $produto->status = ($produto->status == 1) ? 0 : 1;
+        $produto->update();
+        return redirect('produtos')->with('msgConfirm', 'Status do produto <'.$produto->nome.'> alterado com sucesso!');
+    }
+
+    function prepareDestroy(Request $request) 
+    {
+        $id = $request->id;
+        $this->destroy($id);
+        return redirect('produtos')->with('msgConfirm', 'Produto excluído com sucesso!');
     }
 }

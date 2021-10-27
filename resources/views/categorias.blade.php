@@ -10,6 +10,9 @@
         @slot('modalText')
             Deseja realmente a excluir a categoria?
         @endslot
+        @slot('modalRoute')
+            /categoria/destroy
+        @endslot
     @endcomponent
 @endsection
 
@@ -18,6 +21,7 @@
     @if (session('msgConfirm'))
         @include('components.msg_confirmacao')
     @endif
+    
     <a href="#" class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#dlgNovaCategoria">
         <i class="fa fa-plus" aria-hidden="true"></i> Nova Categoria
     </a>
@@ -38,12 +42,12 @@
                         <td class="text-center">
                             <a href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Editar Categoria"
                                 onclick="updateCategoria({{ $c->id }});">
-                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                                <i class="fa fa-edit text-dark" aria-hidden="true"></i>
                             </a>
                         </td>
                         <td class="text-center">
                             <a href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Excluir Categoria"
-                                onclick="destroyCategoria({{ $c->id }});">
+                                onclick="destroy({{ $c->id }});">
                                 <i class="fa fa-trash text-danger" aria-hidden="true"></i>
                             </a>
                         </td>

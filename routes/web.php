@@ -38,4 +38,6 @@ Route::delete('/categoria/destroy', [CategoriaController::class, 'prepareDestroy
 Route::get('/produtos', [ProdutoController::class, 'index'])->name('produtos');
 Route::post('/produto/save', [ProdutoController::class, 'store'])->name('produto.save');
 Route::get('/produto/show/{id}', [ProdutoController::class, 'show'])->name('produto.show');
-Route::post('/produto/edit', [ProdutoController::class, 'prepareUpdate'])->name('produto.edit');
+Route::put('/produto/edit', [ProdutoController::class, 'prepareUpdate'])->name('produto.edit');
+Route::get('/produto/change/{id}', [ProdutoController::class, 'changeStatus'])->name('produto.change');
+Route::delete('/produto/delete', [ProdutoController::class, 'prepareDestroy'])->name('produto.delete');

@@ -21,6 +21,7 @@ class CreateProdutosTable extends Migration
             $table->integer('estoque');
             $table->float('preco_custo');
             $table->float('preco_venda');
+            $table->integer('status');
             $table->timestamps();
         });
     }
