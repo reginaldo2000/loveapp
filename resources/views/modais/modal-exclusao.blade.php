@@ -1,5 +1,5 @@
 <div class="modal fade" tabindex="-1" id="dlgExclusao">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">{{ $modalTitle }}</h5>
@@ -14,12 +14,10 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                        <i class="fa fa-times" aria-hidden="true"></i>
-                        Cancelar
+                        Não
                     </button>
                     <button type="submit" class="btn btn-primary">
-                        <i class="fa fa-floppy-o" aria-hidden="true"></i>
-                        Confirmar
+                        Sim
                     </button>
                 </div>
             </form>

@@ -13,9 +13,9 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col">
-                            <div class="form-group">
-                                <label for="" class="form-label">Nome da Categoria:</label>
+                            <div class="form-floating">
                                 <input type="text" name="nomecategoria" id="categoriaNome" class="form-control" required>
+                                <label for="" class="form-label">Nome da Categoria:</label>
                                 <div class="invalid-feedback">
                                     Por favor, informe um nome válido.
                                 </div>
